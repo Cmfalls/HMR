@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMR Designs — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1F2A44;
+    --slate: #5E6578;
+    --gray-mid: #ADAEB0;
+    --gray-light: #D0D0CE;
+    --cream: #F7F5F1;
+    --cream-dark: #ECE9E3;
+    --white: #ffffff;
+  }
+
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--cream);
+    font-family: 'Jost', sans-serif;
+  }
+
+  /* NAV */
+  .nav-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 52px;
+    background: var(--navy);
+  }
+
+  .nav-logo {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 9px 16px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 8.5px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* SECTION */
+  .about-section {
+    padding-top: 88px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+
+  /* MAIN GRID */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 52% 48%;
+    min-height: calc(100vh - 88px - 56px);
+  }
+
+  /* LEFT */
+  .left-panel {
+    background: var(--navy);
+    padding: 80px 72px 80px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    animation: revealLeft 1s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes revealLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* subtle background texture */
+  .left-panel::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .section-tag {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 8.5px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s 0.2s both;
+  }
+
+  .section-tag span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gray-mid);
+    margin-right: 2px;
+  }
+
+  .section-tag::after {
+    content: '';
+    width: 36px;
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--white);
+    letter-spacing: -0.015em;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s 0.3s both;
+  }
+
+  .headline em {
+    font-style: italic;
+    color: var(--gray-light);
+  }
+
+  .rule {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.4s both;
+  }
+
+  .body-copy {
+    font-size: 13px;
+    font-weight: 200;
+    line-height: 2;
+    color: rgba(255,255,255,0.45);
+    max-width: 340px;
+    margin-bottom: 52px;
+    animation: fadeUp 0.8s 0.45s both;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    animation: fadeUp 0.8s 0.55s both;
+  }
+
+  .btn-primary {
+    font-family: 'Jost', sans-serif;
+    font-size: 8.5px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--white);
+    border: none;
+    padding: 15px 32px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--gray-light); }
+
+  .btn-ghost {
+    font-family: 'Jost', sans-serif;
+    font-size: 8.5px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.8);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RIGHT */
+  .right-panel {
+    display: grid;
+    grid-template-rows: 62% 38%;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: #bbb9b4;
+    animation: revealRight 1s 0.1s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes revealRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .img-slot {
+    background: var(--cream-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .img-slot:hover { background: #e3e0d9; }
+
+  .img-slot.hero {
+    grid-column: 1 / 3;
+  }
+
+  .slot-icon {
+    width: 26px; height: 26px;
+    opacity: 0.25;
+  }
+
+  .hero .slot-icon {
+    width: 34px; height: 34px;
+  }
+
+  .slot-label {
+    font-size: 7.5px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    opacity: 0.6;
+  }
+
+  .slot-tag {
+    position: absolute;
+    bottom: 16px; right: 16px;
+    font-size: 7px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate);
+    border: 1px solid rgba(94,101,120,0.3);
+    padding: 5px 10px;
+    background: rgba(247,245,241,0.75);
+    backdrop-filter: blur(4px);
+  }
+
+  /* CAPTION BAR */
+  .caption-bar {
+    background: var(--white);
+    padding: 0 52px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--cream-dark);
+  }
+
+  .caption-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gray-mid);
+    letter-spacing: 0.02em;
+  }
+
+  .caption-loc {
+    font-size: 7.5px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <div class="nav-logo">HMR</div>
+  <ul class="nav-links">
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">Capabilities</a></li>
+    <li><a href="#">Press</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="about-section">
+  <div class="main-grid">
+
+    <div class="left-panel">
+      <div class="section-tag"><span>01</span> About HMR</div>
+
+      <h2 class="headline">
+        Originality, superior quality, and the discipline to make every detail feel <em>inevitable.</em>
+      </h2>
+
+      <div class="rule"></div>
+
+      <p class="body-copy">
+        As Chicago's premier event design and production firm, HMR Designs integrates leading creative minds and skilled artisans to create one-of-a-kind experiences for every client.
+      </p>
+
+      <div class="cta-row">
+        <button class="btn-primary">Plan an Event</button>
+        <button class="btn-ghost">Explore the Work</button>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="img-slot hero">
+        <svg class="slot-icon" viewBox="0 0 32 32" fill="none">
+          <rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/>
+          <circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/>
+          <path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="slot-label">Primary event photo</span>
+        <div class="slot-tag">+ Add Image</div>
+      </div>
+
+      <div class="img-slot">
+        <svg class="slot-icon" viewBox="0 0 32 32" fill="none">
+          <rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/>
+          <circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/>
+          <path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="slot-label">Floral detail</span>
+        <div class="slot-tag">+ Add Image</div>
+      </div>
+
+      <div class="img-slot">
+        <svg class="slot-icon" viewBox="0 0 32 32" fill="none">
+          <rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/>
+          <circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/>
+          <path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="slot-label">Lighting / scene</span>
+        <div class="slot-tag">+ Add Image</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="caption-bar">
+    <span class="caption-text">Design, fabrication, floral, lighting, and furnishings in concert.</span>
+    <span class="caption-loc">Chicago, Illinois</span>
+  </div>
+</section>
+
+</body>
+</html>

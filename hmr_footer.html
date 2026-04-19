@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMR Designs — Footer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1F2A44;
+    --navy-mid: #263350;
+    --slate: #5E6578;
+    --gray-mid: #ADAEB0;
+    --gray-light: #D0D0CE;
+    --cream: #F2F0EC;
+    --white: #ffffff;
+  }
+  html, body {
+    width: 100%;
+    background: var(--cream);
+    font-family: 'Jost', sans-serif;
+  }
+
+  /* ── CONTACT BAND ── */
+  .contact-band {
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+    display: flex; align-items: center;
+  }
+
+  /* background photo placeholder */
+  .contact-bg {
+    position: absolute; inset: 0;
+    background: var(--navy-mid);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .contact-bg-label {
+    font-size: 8px; font-weight: 300; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.15);
+  }
+
+  /* dark overlay */
+  .contact-band::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(20,28,46,0.72);
+    pointer-events: none;
+  }
+
+  .contact-inner {
+    position: relative; z-index: 2;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 80px 52px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
+  }
+
+  /* LEFT */
+  .contact-left { padding-top: 8px; }
+
+  .contact-eyebrow {
+    font-size: 8.5px; font-weight: 300; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gray-mid);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .contact-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3.5vw, 46px);
+    font-weight: 300; line-height: 1.12;
+    color: var(--white); letter-spacing: -0.015em;
+    margin-bottom: 20px;
+  }
+
+  .contact-sub {
+    font-size: 13px; font-weight: 200; line-height: 1.9;
+    color: rgba(255,255,255,0.42);
+    max-width: 320px; margin-bottom: 36px;
+  }
+
+  .contact-links {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .contact-link {
+    font-size: 12px; font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .contact-link::before {
+    content: '';
+    display: inline-block; width: 14px; height: 1px;
+    background: rgba(255,255,255,0.25); flex-shrink: 0;
+  }
+  .contact-link:hover { color: rgba(255,255,255,0.9); }
+
+  /* RIGHT — form */
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .form-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .form-row.full { grid-template-columns: 1fr; }
+
+  .form-field { display: flex; flex-direction: column; gap: 7px; }
+
+  .form-label {
+    font-size: 7.5px; font-weight: 400; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+    border-radius: 0;
+    appearance: none;
+  }
+  .form-input::placeholder,
+  .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.09);
+  }
+
+  .form-select { cursor: pointer; }
+  .form-select option { background: var(--navy); color: var(--white); }
+
+  .form-textarea { resize: none; height: 110px; line-height: 1.7; }
+
+  .btn-submit {
+    font-family: 'Jost', sans-serif;
+    font-size: 8.5px; font-weight: 400; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy); background: var(--white);
+    border: none; padding: 16px 0;
+    width: 100%; cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 4px;
+  }
+  .btn-submit:hover { background: var(--gray-light); }
+
+  .form-note {
+    font-size: 8px; font-weight: 300; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.18); text-align: center;
+    margin-top: -4px;
+  }
+
+  /* ── HERRINGBONE DIVIDER ── */
+  .herringbone {
+    width: 100%; height: 28px; overflow: hidden;
+    background: var(--navy);
+  }
+  .herringbone svg { width: 100%; height: 100%; display: block; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--navy);
+    padding: 52px 0 40px;
+  }
+
+  .footer-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 52px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 32px;
+  }
+
+  /* logo */
+  .footer-logo {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px; font-weight: 400; letter-spacing: 0.3em;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 11px 18px;
+    display: inline-block;
+    line-height: 1.2; text-align: center;
+  }
+  .footer-logo span {
+    display: block; font-size: 7px; font-weight: 300;
+    letter-spacing: 0.28em; color: rgba(255,255,255,0.35);
+    margin-top: 3px;
+  }
+
+  /* nav */
+  .footer-nav {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .footer-nav a {
+    font-size: 8.5px; font-weight: 300; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gray-mid);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-nav a:hover { color: var(--white); }
+
+  /* divider */
+  .footer-rule {
+    width: 100%; height: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  /* contact row */
+  .footer-contact {
+    display: flex; gap: 40px; align-items: center;
+  }
+  .footer-contact a {
+    font-size: 12px; font-weight: 300; letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.4); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-contact a:hover { color: rgba(255,255,255,0.8); }
+  .footer-contact .sep {
+    width: 1px; height: 14px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* sister + copyright */
+  .footer-bottom {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 8px;
+  }
+  .footer-sister {
+    font-size: 11px; font-weight: 300;
+    color: rgba(255,255,255,0.3); letter-spacing: 0.04em;
+  }
+  .footer-sister a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-sister a:hover { color: rgba(255,255,255,0.8); }
+
+  .footer-copy {
+    font-size: 10px; font-weight: 300; letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.18);
+  }
+</style>
+</head>
+<body>
+
+<!-- CONTACT BAND -->
+<div class="contact-band">
+  <div class="contact-bg">
+    <span class="contact-bg-label">Background photo — add image</span>
+  </div>
+
+  <div class="contact-inner">
+    <div class="contact-left">
+      <span class="contact-eyebrow">Begin the Conversation</span>
+      <h2 class="contact-headline">Interested in collaborating on your event?</h2>
+      <p class="contact-sub">Share a few details and the HMR concierge team will help shape the next step.</p>
+      <div class="contact-links">
+        <a href="tel:17737820800" class="contact-link">1.773.782.0800</a>
+        <a href="mailto:concierge@hmrdesigns.com" class="contact-link">concierge@hmrdesigns.com</a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Name</label>
+          <input class="form-input" type="text" placeholder="Your name">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="your@email.com">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Event Type</label>
+          <select class="form-select">
+            <option>Wedding</option>
+            <option>Corporate</option>
+            <option>Social</option>
+            <option>Destination</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Event Date</label>
+          <input class="form-input" type="text" placeholder="Month / year or exact date">
+        </div>
+      </div>
+
+      <div class="form-row full">
+        <div class="form-field">
+          <label class="form-label">What should the event feel like?</label>
+          <textarea class="form-textarea" placeholder="Describe the mood, scale, or vision…"></textarea>
+        </div>
+      </div>
+
+      <button class="btn-submit">Send Inquiry</button>
+      <p class="form-note">The HMR team typically responds within one business day.</p>
+    </div>
+  </div>
+</div>
+
+<!-- HERRINGBONE DIVIDER -->
+<div class="herringbone">
+  <svg viewBox="0 0 1440 28" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- repeating chevron/herringbone pattern -->
+    <defs>
+      <pattern id="hb" x="0" y="0" width="40" height="28" patternUnits="userSpaceOnUse">
+        <!-- left half chevron -->
+        <polyline points="0,28 10,4 20,28" fill="none" stroke="rgba(173,174,176,0.25)" stroke-width="1"/>
+        <!-- right half chevron -->
+        <polyline points="20,28 30,4 40,28" fill="none" stroke="rgba(173,174,176,0.25)" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="1440" height="28" fill="url(#hb)"/>
+  </svg>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <div class="footer-logo">
+      HMR
+      <span>DESIGNS</span>
+    </div>
+
+    <ul class="footer-nav">
+      <li><a href="#">Gallery</a></li>
+      <li><a href="#">Capabilities</a></li>
+      <li><a href="#">Press</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Shop</a></li>
+    </ul>
+
+    <div class="footer-rule"></div>
+
+    <div class="footer-contact">
+      <a href="tel:17737820800">1.773.782.0800</a>
+      <div class="sep"></div>
+      <a href="mailto:concierge@hmrdesigns.com">concierge@hmrdesigns.com</a>
+      <div class="sep"></div>
+      <a href="#">Instagram</a>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-sister">Visit our sister company: <a href="#">HMR Destinations</a></p>
+      <p class="footer-copy">Copyright HMR Designs, 2026</p>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>

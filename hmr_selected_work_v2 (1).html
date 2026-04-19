@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMR Designs — Selected Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1F2A44;
+    --slate: #5E6578;
+    --gray-mid: #ADAEB0;
+    --gray-light: #D0D0CE;
+    --cream: #F2F0EC;
+    --cream-dark: #E3E0D9;
+    --white: #ffffff;
+  }
+  html, body {
+    width: 100%; min-height: 100vh;
+    background: var(--white);
+    font-family: 'Jost', sans-serif;
+  }
+
+  .work-section {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 104px 52px 128px;
+  }
+
+  /* ── LABEL ── */
+  .section-tag {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 8.5px; font-weight: 300; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--slate);
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.8s 0.1s ease forwards;
+  }
+  .section-tag::after { content:''; width:40px; height:1px; background:var(--gray-mid); }
+
+  /* ── HEADLINE ── */
+  .headline-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    gap: 40px;
+    opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+  .headline-row h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3.5vw, 50px);
+    font-weight: 300; line-height: 1.1;
+    color: var(--navy); letter-spacing: -0.015em;
+    max-width: 600px;
+  }
+  .headline-row p {
+    font-size: 12px; font-weight: 300; line-height: 1.9;
+    color: var(--gray-mid); max-width: 220px;
+    flex-shrink: 0; padding-bottom: 4px;
+  }
+
+  /* ── GALLERY ── */
+  .gallery-wrap {
+    opacity: 0; animation: fadeUp 0.9s 0.35s ease forwards;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .gallery-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr 1fr;
+    gap: 4px;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--cream-dark);
+  }
+  .gallery-item.tall { aspect-ratio: 4/5; }
+  .gallery-item.wide { aspect-ratio: 5/4; }
+
+  /* image placeholder */
+  .img-fill {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1),
+                background 0.4s ease;
+  }
+  .gallery-item:hover .img-fill {
+    transform: scale(1.04);
+    background: #d6d3cc;
+  }
+
+  .img-icon { width: 22px; height: 22px; opacity: 0.18; }
+  .img-slot-label {
+    font-size: 7px; font-weight: 300; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--slate); opacity: 0.4;
+  }
+
+  /* hover overlay */
+  .img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top,
+      rgba(20,28,46,0.78) 0%,
+      rgba(20,28,46,0.2) 45%,
+      transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 22px 20px;
+    gap: 5px;
+  }
+  .gallery-item:hover .img-overlay { opacity: 1; }
+
+  .overlay-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 300; font-style: italic;
+    color: #fff; line-height: 1.25;
+    transform: translateY(8px);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .overlay-sub {
+    font-size: 8px; font-weight: 300; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    transform: translateY(8px);
+    transition: transform 0.4s 0.04s cubic-bezier(0.16,1,0.3,1);
+  }
+  .gallery-item:hover .overlay-title,
+  .gallery-item:hover .overlay-sub { transform: translateY(0); }
+
+  /* thin border flash on hover */
+  .gallery-item::after {
+    content: '';
+    position: absolute; inset: 0;
+    border: 1px solid rgba(255,255,255,0);
+    transition: border-color 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .gallery-item:hover::after { border-color: rgba(255,255,255,0.12); }
+
+  /* ── CTA ROW ── */
+  .cta-row {
+    margin-top: 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 32px;
+    border-top: 1px solid rgba(31,42,68,0.08);
+    opacity: 0; animation: fadeUp 0.8s 0.55s ease forwards;
+  }
+  .cta-left {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .cta-eyebrow {
+    font-size: 8px; font-weight: 300; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gray-mid);
+  }
+  .cta-italic {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 300; font-style: italic;
+    color: var(--slate);
+  }
+
+  .btn-view {
+    font-family: 'Jost', sans-serif;
+    font-size: 8.5px; font-weight: 400; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy); background: transparent;
+    border: 1px solid rgba(31,42,68,0.22);
+    padding: 15px 36px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: background 0.25s, border-color 0.25s, color 0.25s, gap 0.25s;
+  }
+  .btn-view:hover {
+    background: var(--navy); color: #fff;
+    border-color: var(--navy); gap: 16px;
+  }
+  .btn-view .arrow { font-size: 13px; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<section class="work-section">
+
+  <div class="section-tag">
+    <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:var(--gray-mid);">03</span>
+    Selected Work
+  </div>
+
+  <div class="headline-row">
+    <h2>From intimate ceremony to full-scale spectacle.</h2>
+    <p>Each event carries its own atmosphere, palette, structure, and sense of arrival.</p>
+  </div>
+
+  <div class="gallery-wrap">
+
+    <!-- ROW 1 -->
+    <div class="gallery-grid">
+      <div class="gallery-item tall">
+        <div class="img-fill">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-slot-label">Add image</span>
+        </div>
+        <div class="img-overlay">
+          <span class="overlay-title">Destination ceremony design</span>
+          <span class="overlay-sub">Ceremony &mdash; Abroad</span>
+        </div>
+      </div>
+
+      <div class="gallery-item tall">
+        <div class="img-fill">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-slot-label">Add image</span>
+        </div>
+        <div class="img-overlay">
+          <span class="overlay-title">Floral reception environment</span>
+          <span class="overlay-sub">Reception &mdash; Chicago</span>
+        </div>
+      </div>
+
+      <div class="gallery-item tall">
+        <div class="img-fill">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-slot-label">Add image</span>
+        </div>
+        <div class="img-overlay">
+          <span class="overlay-title">Custom production nightlife</span>
+          <span class="overlay-sub">Corporate &mdash; Chicago</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="gallery-grid-2">
+      <div class="gallery-item wide">
+        <div class="img-fill">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-slot-label">Add image</span>
+        </div>
+        <div class="img-overlay">
+          <span class="overlay-title">Candlelit reception detail</span>
+          <span class="overlay-sub">Reception &mdash; Chicago</span>
+        </div>
+      </div>
+
+      <div class="gallery-item wide">
+        <div class="img-fill">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-slot-label">Add image</span>
+        </div>
+        <div class="img-overlay">
+          <span class="overlay-title">Scenic fabrication install</span>
+          <span class="overlay-sub">Fabrication &mdash; Chicago</span>
+        </div>
+      </div>
+
+      <div class="gallery-item wide">
+        <div class="img-fill">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-slot-label">Add image</span>
+        </div>
+        <div class="img-overlay">
+          <span class="overlay-title">Corporate gala production</span>
+          <span class="overlay-sub">Corporate &mdash; Chicago</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-row">
+    <div class="cta-left">
+      <span class="cta-eyebrow">Over 1,000 events produced</span>
+      <span class="cta-italic">View the full gallery</span>
+    </div>
+    <button class="btn-view">Explore the Work <span class="arrow">→</span></button>
+  </div>
+
+</section>
+
+</body>
+</html>

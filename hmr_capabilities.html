@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMR Designs — Capabilities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1F2A44;
+    --navy-deep: #141c2e;
+    --slate: #5E6578;
+    --gray-mid: #ADAEB0;
+    --gray-light: #D0D0CE;
+    --cream: #F2F0EC;
+    --cream-dark: #E8E5DF;
+    --white: #ffffff;
+  }
+  html, body {
+    width: 100%; min-height: 100vh;
+    background: var(--cream);
+    font-family: 'Jost', sans-serif;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .capabilities-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 96px 52px 120px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-tag {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 8.5px; font-weight: 300; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--slate);
+    margin-bottom: 32px;
+  }
+  .section-tag::after { content:''; width:40px; height:1px; background:var(--gray-mid); }
+
+  /* ── HEADLINE BLOCK ── */
+  .headline-block { margin-bottom: 52px; }
+  .headline-block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 3.8vw, 52px);
+    font-weight: 300; line-height: 1.12;
+    color: var(--navy); letter-spacing: -0.015em;
+    margin-bottom: 16px;
+  }
+  .headline-block p {
+    font-size: 13px; font-weight: 300; line-height: 1.9;
+    color: var(--slate); max-width: 400px;
+  }
+
+  /* ── MAIN GRID ── */
+  .capabilities-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    background: var(--white);
+    border: 1px solid rgba(31,42,68,0.08);
+  }
+
+  /* ── LEFT NAV ── */
+  .cap-nav {
+    border-right: 1px solid rgba(31,42,68,0.07);
+  }
+
+  .cap-nav-item {
+    display: block; width: 100%;
+    padding: 22px 28px;
+    border: none; background: transparent;
+    text-align: left; cursor: pointer;
+    border-bottom: 1px solid rgba(31,42,68,0.06);
+    transition: background 0.2s;
+    position: relative;
+  }
+  .cap-nav-item:last-child { border-bottom: none; }
+
+  .cap-nav-item:hover { background: rgba(31,42,68,0.03); }
+
+  .cap-nav-item.active {
+    background: var(--navy);
+  }
+
+  .cap-nav-item .item-name {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--navy);
+    margin-bottom: 4px;
+    transition: color 0.2s;
+  }
+  .cap-nav-item.active .item-name { color: var(--white); }
+
+  .cap-nav-item .item-tag {
+    display: block;
+    font-size: 8px; font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    transition: color 0.2s;
+  }
+  .cap-nav-item.active .item-tag { color: rgba(255,255,255,0.45); }
+
+  /* active left bar */
+  .cap-nav-item.active::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--gray-mid);
+  }
+
+  /* ── RIGHT CONTENT PANEL ── */
+  .cap-content {
+    position: relative;
+    min-height: 420px;
+  }
+
+  .cap-panel {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .cap-panel.active {
+    opacity: 1;
+    pointer-events: all;
+    position: relative;
+  }
+
+  /* image slot */
+  .cap-image {
+    background: var(--cream-dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 10px;
+    min-height: 380px;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+    transition: background 0.25s;
+  }
+  .cap-image:hover { background: #dddad4; }
+
+  .img-icon { width: 28px; height: 28px; opacity: 0.25; }
+  .img-label {
+    font-size: 7.5px; font-weight: 300; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--slate); opacity: 0.6;
+  }
+  .img-tag {
+    position: absolute; bottom: 14px; right: 14px;
+    font-size: 7px; font-weight: 400; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--slate);
+    border: 1px solid rgba(94,101,120,0.3);
+    padding: 4px 10px;
+    background: rgba(242,240,236,0.8);
+  }
+
+  /* text content */
+  .cap-text {
+    padding: 44px 40px;
+    display: flex; flex-direction: column; justify-content: center;
+    border-left: 1px solid rgba(31,42,68,0.06);
+  }
+
+  .cap-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 2.4vw, 34px);
+    font-weight: 300; line-height: 1.2;
+    color: var(--navy); letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+
+  .cap-text p {
+    font-size: 13px; font-weight: 300; line-height: 1.9;
+    color: var(--slate); max-width: 280px;
+  }
+
+  .cap-text .learn-more {
+    margin-top: 32px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 8.5px; font-weight: 400; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--navy);
+    text-decoration: none; cursor: pointer;
+    background: none; border: none;
+    transition: gap 0.2s;
+  }
+  .cap-text .learn-more:hover { gap: 14px; }
+  .cap-text .learn-more .arrow { font-size: 13px; }
+
+  /* fade-in on panel switch */
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .cap-panel.active .cap-text h3,
+  .cap-panel.active .cap-text p,
+  .cap-panel.active .cap-text .learn-more {
+    animation: panelIn 0.4s ease both;
+  }
+  .cap-panel.active .cap-text p { animation-delay: 0.05s; }
+  .cap-panel.active .cap-text .learn-more { animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+
+<section class="capabilities-section">
+
+  <div class="section-tag">
+    <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:var(--gray-mid);">02</span>
+    Capabilities Atelier
+  </div>
+
+  <div class="headline-block">
+    <h2>Every discipline, composed as one experience.</h2>
+    <p>From custom graphics to floral scale and scenic construction, HMR's team builds the emotional architecture of an event.</p>
+  </div>
+
+  <div class="capabilities-grid">
+
+    <!-- LEFT NAV -->
+    <nav class="cap-nav">
+      <button class="cap-nav-item active" data-panel="art">
+        <span class="item-name">Art &amp; Graphics</span>
+        <span class="item-tag">Make a Statement</span>
+      </button>
+      <button class="cap-nav-item" data-panel="fabric">
+        <span class="item-name">Fabric</span>
+        <span class="item-tag">Set the Scene</span>
+      </button>
+      <button class="cap-nav-item" data-panel="fabrication">
+        <span class="item-name">Fabrication</span>
+        <span class="item-tag">Custom Built</span>
+      </button>
+      <button class="cap-nav-item" data-panel="floral">
+        <span class="item-name">Floral</span>
+        <span class="item-tag">Bountiful Blooms</span>
+      </button>
+      <button class="cap-nav-item" data-panel="furnishings">
+        <span class="item-name">Furnishings</span>
+        <span class="item-tag">Elevated Rentals</span>
+      </button>
+      <button class="cap-nav-item" data-panel="lighting">
+        <span class="item-name">Lighting Design</span>
+        <span class="item-tag">Illuminated Experiences</span>
+      </button>
+      <button class="cap-nav-item" data-panel="scenic">
+        <span class="item-name">Scenic Design</span>
+        <span class="item-tag">Tailored Scenery</span>
+      </button>
+    </nav>
+
+    <!-- RIGHT PANELS -->
+    <div class="cap-content">
+
+      <div class="cap-panel active" id="panel-art">
+        <div class="cap-image">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-label">Art &amp; Graphics photo</span>
+          <div class="img-tag">+ Add Image</div>
+        </div>
+        <div class="cap-text">
+          <h3>Identity moments that guests remember.</h3>
+          <p>Custom graphics transform signage, escort walls, dance floors, and scenic backdrops into an event's visual signature.</p>
+          <button class="learn-more">Learn More <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div class="cap-panel" id="panel-fabric">
+        <div class="cap-image">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-label">Fabric photo</span>
+          <div class="img-tag">+ Add Image</div>
+        </div>
+        <div class="cap-text">
+          <h3>Rooms softened, shaped, and made theatrical.</h3>
+          <p>Fabric creates scale, intimacy, movement, and atmosphere across ceremonies, receptions, stages, and dining environments.</p>
+          <button class="learn-more">Learn More <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div class="cap-panel" id="panel-fabrication">
+        <div class="cap-image">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-label">Fabrication photo</span>
+          <div class="img-tag">+ Add Image</div>
+        </div>
+        <div class="cap-text">
+          <h3>Built pieces with presence and precision.</h3>
+          <p>Custom scenic structures, bars, installations, and statement pieces designed to hold up under both close inspection and guest energy.</p>
+          <button class="learn-more">Learn More <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div class="cap-panel" id="panel-floral">
+        <div class="cap-image">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-label">Floral photo</span>
+          <div class="img-tag">+ Add Image</div>
+        </div>
+        <div class="cap-text">
+          <h3>Botanical design with architectural scale.</h3>
+          <p>Floral work carries color, texture, and fragrance through the event while staying connected to the larger production story.</p>
+          <button class="learn-more">Learn More <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div class="cap-panel" id="panel-furnishings">
+        <div class="cap-image">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-label">Furnishings photo</span>
+          <div class="img-tag">+ Add Image</div>
+        </div>
+        <div class="cap-text">
+          <h3>Every seat, surface, and lounge with intent.</h3>
+          <p>Furniture selections define how guests gather, linger, dine, and move through the celebration.</p>
+          <button class="learn-more">Learn More <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div class="cap-panel" id="panel-lighting">
+        <div class="cap-image">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-label">Lighting photo</span>
+          <div class="img-tag">+ Add Image</div>
+        </div>
+        <div class="cap-text">
+          <h3>Atmosphere tuned moment by moment.</h3>
+          <p>Lighting brings dimension, rhythm, and emotional timing to the design, from ceremony glow to late-night transformation.</p>
+          <button class="learn-more">Learn More <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div class="cap-panel" id="panel-scenic">
+        <div class="cap-image">
+          <svg class="img-icon" viewBox="0 0 32 32" fill="none"><rect x="2" y="6" width="28" height="20" rx="1" stroke="#5E6578" stroke-width="1.2"/><circle cx="10" cy="13" r="3" stroke="#5E6578" stroke-width="1.2"/><path d="M2 22l7-6 5 5 5-7 11 12" stroke="#5E6578" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="img-label">Scenic Design photo</span>
+          <div class="img-tag">+ Add Image</div>
+        </div>
+        <div class="cap-text">
+          <h3>Environments composed from the ground up.</h3>
+          <p>Scenic design gives the event its world: arrival, reveal, ceremony, dinner, stage, and every transition in between.</p>
+          <button class="learn-more">Learn More <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<script>
+  const navItems = document.querySelectorAll('.cap-nav-item');
+  const panels   = document.querySelectorAll('.cap-panel');
+
+  navItems.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.panel;
+
+      navItems.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      panels.forEach(p => {
+        p.classList.remove('active');
+        if (p.id === 'panel-' + target) p.classList.add('active');
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMR Designs — Craft & Production</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1F2A44;
+    --navy-mid: #263350;
+    --slate: #5E6578;
+    --gray-mid: #ADAEB0;
+    --gray-light: #D0D0CE;
+    --cream: #F2F0EC;
+    --white: #ffffff;
+  }
+  html, body {
+    width: 100%; min-height: 100vh;
+    background: var(--navy);
+    font-family: 'Jost', sans-serif;
+  }
+
+  .craft-section {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 104px 52px 128px;
+  }
+
+  /* ── LABEL ── */
+  .section-tag {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 8.5px; font-weight: 300; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--slate);
+    margin-bottom: 72px;
+    opacity: 0; animation: fadeUp 0.8s 0.1s ease forwards;
+  }
+  .section-tag::after { content:''; width:40px; height:1px; background:var(--slate); opacity:0.4; }
+
+  /* ── MAIN GRID ── */
+  .craft-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  /* ── LEFT ── */
+  .craft-left {
+    opacity: 0; animation: fadeUp 0.9s 0.25s ease forwards;
+    position: sticky; top: 80px;
+  }
+
+  .craft-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.8vw, 54px);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white); letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+
+  .craft-left p {
+    font-size: 13px; font-weight: 200; line-height: 2;
+    color: rgba(255,255,255,0.42); max-width: 360px;
+  }
+
+  /* small decorative rule under headline */
+  .craft-left .rule {
+    width: 32px; height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin-bottom: 28px;
+  }
+
+  /* ── RIGHT ── */
+  .craft-right {
+    opacity: 0; animation: fadeUp 0.9s 0.4s ease forwards;
+    display: flex; flex-direction: column;
+    gap: 0;
+  }
+
+  .process-item {
+    padding: 36px 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 28px;
+    align-items: start;
+    cursor: default;
+    transition: background 0.2s;
+  }
+  .process-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+
+  .process-item:hover .process-title { color: var(--white); }
+  .process-item:hover .process-num { color: rgba(255,255,255,0.35); }
+
+  .process-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 300; font-style: italic;
+    color: rgba(255,255,255,0.18);
+    padding-top: 2px;
+    transition: color 0.3s;
+  }
+
+  .process-body {}
+
+  .process-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    transition: color 0.3s;
+  }
+
+  .process-desc {
+    font-size: 13px; font-weight: 300; line-height: 1.85;
+    color: rgba(255,255,255,0.38);
+    max-width: 360px;
+  }
+
+  /* expanding detail line on hover */
+  .process-detail {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 16px;
+    font-size: 8px; font-weight: 400; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.18);
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.35s ease;
+    opacity: 0;
+  }
+  .process-detail::before {
+    content: '';
+    display: inline-block; width: 20px; height: 1px;
+    background: rgba(255,255,255,0.18); flex-shrink: 0;
+  }
+  .process-item:hover .process-detail {
+    max-height: 30px; opacity: 1;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<section class="craft-section">
+
+  <div class="section-tag">
+    <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:var(--slate);">04</span>
+    Craft &amp; Production
+  </div>
+
+  <div class="craft-grid">
+
+    <!-- LEFT -->
+    <div class="craft-left">
+      <h2>Forty years of creative fluency, assembled under one roof.</h2>
+      <div class="rule"></div>
+      <p>HMR brings together designers, producers, floral artists, fabricators, graphic artists, lighting specialists, and artisans who know how to turn a concept into a room guests feel immediately.</p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="craft-right">
+
+      <div class="process-item">
+        <span class="process-num">01</span>
+        <div class="process-body">
+          <h3 class="process-title">Concept</h3>
+          <p class="process-desc">Define the point of view, mood, palette, and guest journey.</p>
+          <div class="process-detail">Design direction &amp; mood development</div>
+        </div>
+      </div>
+
+      <div class="process-item">
+        <span class="process-num">02</span>
+        <div class="process-body">
+          <h3 class="process-title">Craft</h3>
+          <p class="process-desc">Design floral, graphics, fabrication, furniture, fabric, and lighting as one system.</p>
+          <div class="process-detail">All disciplines built in-house</div>
+        </div>
+      </div>
+
+      <div class="process-item">
+        <span class="process-num">03</span>
+        <div class="process-body">
+          <h3 class="process-title">Production</h3>
+          <p class="process-desc">Install with the discipline, timing, and finish required for luxury events.</p>
+          <div class="process-detail">Full install &amp; day-of execution</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>
