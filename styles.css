@@ -1248,16 +1248,16 @@ h1 {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-height: 14px;
   margin-top: 16px;
   font-size: 8px;
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.18);
-  max-height: 0;
-  overflow: hidden;
   opacity: 0;
-  transition: max-height 0.35s ease, opacity 0.35s ease;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
 .process-detail::before {
@@ -1270,8 +1270,8 @@ h1 {
 }
 
 .process-item:hover .process-detail {
-  max-height: 30px;
   opacity: 1;
+  visibility: visible;
 }
 
 /* ── Contact Band ── */
