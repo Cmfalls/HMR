@@ -1111,7 +1111,7 @@ h1 {
   width: clamp(960px, 105vw, 1380px);
   bottom: -24%;
   left: -14%;
-  opacity: 0.3;
+  opacity: 0.55;
   transform: rotate(-12deg);
 }
 
@@ -1120,7 +1120,7 @@ h1 {
   width: clamp(1140px, 124vw, 1660px);
   top: -30%;
   right: -4%;
-  opacity: 0.25;
+  opacity: 0.45;
   transform: rotate(-42deg);
 }
 
